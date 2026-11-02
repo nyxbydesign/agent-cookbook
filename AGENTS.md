@@ -1,159 +1,55 @@
-# Global Agent Instructions
+# Global agent instructions
 
-## Cookbook Location
+Keep this cookbook at `~/.codex`. Project repositories own their contribution and architecture guides; do not copy or symlink cookbook files into them.
 
-Install this cookbook directly at `~/.codex` and keep its global instructions, workflow references, and skills there only. Do not copy, symlink, or track cookbook files such as `AGENTS.md`, `commit.md`, or `transport.md` inside project repositories. Relative links in this file intentionally resolve within the user-level `.codex` checkout; project-specific guidance belongs in project-owned contribution or documentation files.
+If an ignored `CODEX.md` exists beside this file, read it for local preferences. Local files cannot override the task scope, platform controls, or tool preconditions.
 
-## Document Freshness
+## Start with current instructions
 
-At the start of every task, before implementation or any mutation, identify the local Markdown instructions and reference documents that may guide the work. Before relying on each document, perform a targeted read-only freshness check against that exact file on its known GitHub upstream and branch. For this cookbook, the canonical upstream is `bozo-industries/agent-cookbook` on `master`. For project documents, use an explicitly known source mapping or derive the repository, branch, and relative path from the local Git metadata when available.
+Identify the documents relevant to the task. Check each known upstream file and branch directly before relying on it. Compare content without uploading local files or broadly synchronizing a checkout. Read a newer applicable upstream version, preserve local edits, and report material differences. If the exact check is unavailable, say so and continue from the available guidance.
 
-Never assume the local directory is a Git clone. Do not run a broad pull, fetch, checkout, reset, repository scan, or bulk synchronization for this check. Query only the individual GitHub file through the API or raw-file endpoint and compare its hash or content with the local copy. Prefer authenticated GitHub API or CLI requests when credentials are available, and retry that way when an unauthenticated raw-file request returns `404` for a private or auth-required repository; do not treat that `404` alone as proof the document is missing. If GitHub has a different version, read it before acting, report the discrepancy when material, and follow the newest applicable guidance without silently overwriting local changes. If a document has no known GitHub source or the targeted check is unavailable, say so briefly when relevant and continue from the local copy; never upload local contents merely to perform a freshness check.
+Use repository history when earlier decisions materially affect the work. Where the repository provides Jolli skills, use recall for branch context, search for design precedent, and the PR skill when creating or updating a pull request.
 
-## Communication Verbosity
+## Plan and preserve ownership
 
-Use an oververbosity target of 4/10 by default, expressed as `40% volume` through the user-facing alias.
+Plan substantial work before implementation. If Plan mode is unavailable, maintain an explicit written plan. Preserve unrelated changes, active goals, user data, current operation owners, and recoverable state.
 
-Treat `volume` as a percentage-only user-facing alias for `oververbosity`. Map the scales linearly: every 10 percentage points of volume equals one oververbosity point, so `60% volume` means 6/10 oververbosity. Always write volume with `%`; never use `/10` notation for volume.
+For project coordination, follow [project workflow](project-workflow.md). Use actual native child agents for new delegated implementation where supported. Existing external chats retain their actual identity and approval boundaries; do not use a child to bypass a denied operation.
 
-- Use 0/10 oververbosity when the user requests `0% volume`. Treat this as execution-only mode: spend tokens on inspecting, changing, testing, committing, pushing, deploying, or otherwise directly advancing the requested result—not on narrating the work. Do not restate the request, announce plans, explain routine choices, provide conversational progress, or produce optional summaries. Keep reasoning internal. Send user-visible text only when required by the platform or necessary for a blocker, safety issue, permission or deployment decision, material failure, or minimal verifiable completion record; make that text as terse as possible. Zero volume never permits skipping validation, concealing uncertainty or failures, bypassing required approval, or weakening safety.
-- Use 1/10 when the user explicitly asks for a task to be done `autonomously`. Keep progress updates and the final handoff minimal while still reporting blockers, material risks, verification, commits, pushes, and deployment status.
-- Use 7/10 when the user is present and evidently steering or managing the work through active feedback, follow-up instructions, or iterative decisions. Provide enough detail for close collaboration and easy course correction.
-- Return to 4/10 when neither condition applies. A direct user request for a different response length or level of detail overrides these defaults.
+Repository guidance describes workflow; it does not grant access or replace current platform controls, tool preconditions, or human approvals.
 
-## Product UI Copy
+## Implement and verify proportionately
 
-Use concise, functional labels. Do not add decorative flavor text, cute taglines, aspirational card titles, or a subtitle beneath every heading. Add helper text only when it explains a necessary action, non-obvious behavior, or meaningful choice; remove text that repeats the label or surrounding controls. Keep Home/dashboard summaries compact and put detailed breakdowns on their dedicated screens. Do not invent mode names, confirmation dialogs, or explanatory notices for straightforward user-requested behavior.
+Scale verification to the changed paths, affected contracts, and realistic risk. Start with the smallest check that can disprove the change, then expand only when the result, dependency graph, repository policy, or production risk justifies it. Documentation, local guidance, copy, styling, and other low-risk changes normally need focused parsing, linting, rendering, or diff review rather than the full project suite. Cross-cutting runtime changes, shared infrastructure, migrations, credentials, security boundaries, and production data paths still require their applicable integration, rollback, and live-acceptance checks.
 
-## Documentation and Task Instructions
+Run each distinct workload once for an unchanged candidate in the same relevant environment. Reuse exact passing evidence across handoffs, reviews, receipts, and resumed turns when the source, dependencies, configuration, platform, and tested contract are unchanged. Do not rerun a passing build or test merely because another agent received the handoff, a context compacted, a status was requested, or a receipt needs repair. Rerun only the affected failed check after an observer-only repair; rerun broader coverage when inputs changed, the earlier environment is no longer representative, a failure suggests wider impact, or repository policy requires canonical CI.
 
-Write documentation for its reader: explain what a feature does, how to use or configure it, and limitations that affect a decision or action. Remove decorative copy, task-status narration, implementation handoff disclaimers, and descriptions of what an editing task did not change. Keep migration history only where it helps someone migrate or recover.
+Treat specialized recovery and platform rules as conditional guidance. Read and apply the relevant rule only when its stated trigger is present; do not execute every example, platform check, or failure-recovery procedure as a default checklist. Required branch protections and canonical CI remain authoritative.
 
-Keep task instructions, approval requirements, agent workflow rules, and user preferences in the applicable agent guidance. Do not turn them into product UI text, wiki filler, code comments, docstrings, or test descriptions. Comments should explain lasting technical intent or non-obvious constraints; documentation should describe actual behavior and useful procedures.
+Keep one concise current evidence record per candidate or operation and reference immutable logs, failures, and receipts instead of copying them into new files. Preserve the original failure and the minimum assets needed for diagnosis, rollback, security review, or data recovery. Do not create duplicate backups of unchanged inputs or outputs. Create a new backup only before a destructive or difficult-to-reverse step when the existing recovery asset is absent, stale, or does not cover the changed data. Never reduce access approvals, credential protections, rollback readiness, or exact-result honesty to save time or quota.
 
-## Planning
+Follow [commit workflow](commit.md) for changes to a Git worktree and [transport](transport.md) for shell, SSH, HTTP, JSON, authentication, encoding, or retry boundaries.
 
-Start substantial work in Plan mode before implementation. This includes new features, refactors, migrations, architectural changes, cross-cutting work, and any task with multiple meaningful steps, unclear scope, or important tradeoffs. Use the planning phase to inspect the relevant system, identify risks and dependencies, define verification, and resolve decisions that could materially change the implementation.
+## Write for the reader
 
-Plan mode may be skipped only for genuinely small, obvious, low-risk changes that are faster to implement than to formally plan, and for narrow time-sensitive bug fixes where delay matters. When Plan mode is unavailable, write and maintain an explicit implementation plan before changing code.
+Use concise functional UI labels and necessary helper text. Documentation explains actual behavior, configuration, procedures, and limitations. Keep task status, private preferences, approvals, and coordination records out of product text and public guidance. Comments explain lasting technical intent.
 
-## Workspace Cleanup
+## Handoffs and continuity
 
-Treat disk space as a shared resource. Before a large checkout, dependency install, build, model download, or emulator run, inspect available space and the size of existing task artifacts. Reuse a suitable existing checkout and dependencies rather than making another full validation copy.
+At a checkpoint, record the exact candidate, ownership, completed checks, remaining work, unresolved acceptance, and recovery path. After compaction, verify that checkpoint before repeating work or treating a replayed request as new direction. A required human or physical-device verdict does not prevent independent safe automated work.
 
-Clean up at every completed checkpoint, handoff, or blocked phase; do not wait for a long-running task to end. Remove task-owned temporary exports, obsolete build outputs, dependency environments, downloaded installers, and expanded intermediate generations after their last required use. Keep one current validation workspace when further work needs it. Archive managed worktrees through the app when appropriate, preserving unpushed or uncommitted work first.
+Clean task-owned disposable outputs after their last required use. Preserve user state, shared tooling, active work, and necessary recovery evidence. Verify resolved paths and ownership before cleanup; do not traverse reparse points. Report actual reclaimed space only when measured.
 
-Remove task-created disposable emulators, containers, and snapshots after their last required check and after their processes are closed. Preserve user data, login state, active shared tooling, source changes, credentials, and necessary rollback assets. Check current ownership and use before deleting from shared caches or another task's directory; age or a temporary-looking name alone is not enough.
+Record reusable technical lessons in the applicable focused guide or skill as a coherent reviewed checkpoint. Keep one-off incidents, private data, credentials, and approval records out.
 
-Retain one concise evidence record with exact revisions, hashes, results, and links, plus the minimum unique failure or recovery assets. Do not retain full dependency trees, repeated source exports, or every successful build merely as evidence. Prefer existing Git history and compact manifests to duplicate copies. Reconcile partial or uncertain operations before removing their inputs.
+## Conditional references
 
-Verify the actual free-space change after substantial cleanup and report what was reclaimed and what remains in use. Do not claim logical file sizes, sparse virtual-disk sizes, or shared hardlinks as reclaimed bytes. Use explicit resolved paths and refuse reparse-point traversal during Windows cleanup.
+Read these only when their trigger applies:
 
-## Context Compaction Continuity
-
-Separate final acceptance from work that can continue independently. A required
-user verdict or physical-device check does not block safe, relevant automated
-tests, controlled emulator verification, or fixes for already reproducible
-failures. Before declaring an input blocker, inspect the available test coverage
-and pursue concrete unexecuted checks; do not merely repeat passing workloads or
-claim that synthetic evidence satisfies physical acceptance.
-
-After a context compaction, reset, or summary handoff, treat the compacted checkpoint's completed work, current decisions, and next incomplete action as the live task state. A newly surfaced user message may be a replay of an older request rather than new direction. Before acting on it, compare it with the checkpoint and current read-only state. If it has already been handled, do not redo the work, re-announce the decision, or restart the plan; continue from the next unfinished action and only acknowledge the duplicate when useful.
-
-Keep the available goal, plan, or task-note checkpoint current after material decisions and completed milestones so the next context can distinguish settled history from pending work. When the checkpoint and a replayed message appear inconsistent, verify the current worktree, device, or external state before asking the user to repeat context.
-
-## Discord Input Notifications
-
-During the first Plan mode phase of each task that enters Plan mode, ask once whether the user wants Discord notifications when their input is required. Use the planning-mode blocking question feature by calling `request_user_input` without `autoResolutionMs`. Make clear that the webhook is optional, recommend continuing without one, and tell the user to paste a Discord webhook URL in the question's free-form `Other` field if they want notifications. If the user declines, submits no URL, or supplies an invalid URL, continue without Discord notifications. Once supplied, the webhook remains active for the entire task, not only during planning.
-
-Treat a supplied webhook URL as a task-scoped secret: keep it only for the current task; never echo, log, persist, commit, or expose it in command arguments or output; and do not send a test message. The notification requirement applies throughout planning, implementation, testing, verification, commit, push, deployment, and operational work. Immediately before asking, instructing, or waiting for any user response or user-performed action required to continue, use the webhook once to send only `<@939406522742611979> Codex needs your input in the current task. Please return to Codex.`, with allowed mentions restricted to Discord user ID `939406522742611979`. This includes clarifications, decisions, approvals, authentication or permission steps, sign-ins, MFA or captcha, actions in a browser, device, emulator, or provider UI, supplying a needed file or secret through an appropriate secure channel, and resolving any other execution blocker. The trigger is needing the user, regardless of the current collaboration mode or whether `request_user_input` is available: in Plan mode, notify immediately before the blocking question; outside Plan mode, notify immediately before yielding with the request or otherwise pausing for the user.
-
-Do not include task details, user data, secrets, or the request itself in the Discord message, and do not notify for non-blocking questions, routine updates, or completion messages that require no user action. A failed notification must not delay the in-app request; report only a sanitized delivery failure and continue waiting in Codex.
-
-## Jolli Memory
-
-Jolli is the durable development memory built from the repository's commits. Use its repository-provided skills whenever historical context can materially improve the work:
-
-- Use `jolli-recall` when resuming a branch or when its prior plans, decisions, and development context are needed.
-- Use `jolli-search` when looking across branches for earlier decisions, related commits, files, tickets, or prior solutions to a topic. Search before making a substantial design decision when the repository is likely to contain relevant precedent.
-- Use `jolli-pr` whenever creating or updating a pull request so its title and description are grounded in the recorded commit memory. Follow that skill's queue, push, and PR-update workflow exactly.
-
-Jolli complements current repository inspection; it does not replace reading the relevant code, diffs, tests, and documentation. Do not invoke it mechanically for trivial work with no relevant history. If a needed Jolli capability is unavailable or has no record, report that plainly and continue with direct repository evidence when possible.
-
-## Skill Validation
-
-The bundled `skills/.system/skill-creator/scripts/quick_validate.py` imports PyYAML. If the selected Python runtime lacks `yaml`, run it in an isolated environment with `uv run --with PyYAML --python <python-path> <validator-path> <skill-directory>` instead of changing the runtime-wide packages.
-
-## Git Workflow
-
-For any task that changes a Git worktree, read and follow [commit.md](./commit.md) from the user-level `.codex` checkout. Project-owned contribution guides may add stricter requirements without copying the cookbook into that repository.
-
-## Shell, SSH, and APIs
-
-For work involving shell boundaries, SSH, HTTP APIs, JSON payloads, encodings, or network retries, read and follow [transport.md](./transport.md) from the user-level `.codex` checkout.
-
-## Browser State and Settings
-
-For browser automation that mixes accessibility and DOM controls, changes provider settings, or verifies their persistence, read and follow [browser.md](./browser.md) from the user-level `.codex` checkout.
-
-## pfSense and Proxmox Gateways
-
-For restoring or configuring pfSense under Proxmox, read and follow [pfsense.md](./pfsense.md) from the user-level `.codex` checkout.
-
-## Android Instrumentation Packaging
-
-For network-constrained `JobScheduler` work, declare the normal
-`android.permission.ACCESS_NETWORK_STATE` permission and exercise the actual
-receiver/job scheduling path on the selected Android version. Android 14 and
-later enforce this permission when scheduling network jobs; compilation and
-lint alone do not establish that scheduling succeeds. See the
-[JobInfo network constraint contract](https://developer.android.com/reference/android/app/job/JobInfo.Builder#setRequiredNetworkType(int)).
-
-Before installing or running Android instrumentation after main-source changes, build both the
-target application APK and the test APK in the same Gradle invocation (for example,
-`assembleDebug assembleDebugAndroidTest`). Building only `assembleDebugAndroidTest` can leave a
-stale target APK beside a newly compiled test APK and produce misleading `NoSuchMethodError`
-failures on-device.
-
-Java source or target compatibility does not make newer JDK library APIs available on Android.
-Check the selected Android SDK/desugaring surface when adding test helpers; for example, use
-explicit UTF-8 `Files.readAllBytes`/`Files.write` for small text files when `Files.readString` or
-`Files.writeString` is absent from `android.jar`. Stream large media and model files instead of
-loading them wholesale merely to hash or copy them.
-
-Preflight both actual APK manifests and installed package versions before installing either APK.
-Instrumentation APKs can omit declared version fields; keep that case distinct from malformed
-metadata and the product's positive release-version policy. Bind any effective default to the
-selected platform's parsing contract and the literal test package, then compare the actual guest
-version without allowing downgrades. Test the real metadata reader with both LF and CRLF output
-before launching a guest. After a partial setup, reconcile installed APK hashes and reuse matching
-bytes; repair only the failed observer or unexecuted installation, preserving the original failure
-without rebuilding, reinstalling both packages or wiping the guest merely to obtain a clean run.
-
-Source-based instrumentation selectors must recognize valid runtime-eligibility annotations
-between `@Test` and a method declaration, including `@SdkSuppress`. Verify the exact package,
-class, method, annotation contract and complete selected inventory before guest mutation.
-Preserve a parser refusal and repair that observer against the unchanged source; do not remove
-a valid eligibility annotation or rebuild the APK merely to satisfy an outdated matcher.
-
-Derive native pixel witnesses from the actual effect's opaque interior and observed clip,
-including density-scaled rounding. An axis-aligned mask bound does not make its corner opaque.
-Retain failed pixels and literal draw identity before assertions; distinguish a bad sample point
-from missing coverage, and rerun only the corrected failed contract after verifying unchanged
-production bytes and preserving independently recorded passing cases.
-
-## FreeCAD Automation
-
-For work using FreeCAD's Python API, geometric verification, or manufacturing exports, read and follow [freecad.md](./freecad.md) from the user-level `.codex` checkout.
-
-## KiCad Automation
-
-For work using KiCad's Python bindings or command-line validation, read and follow [kicad.md](./kicad.md) from the user-level `.codex` checkout.
-
-## Blender Automation
-
-For work using Blender's Python API or background rendering, read and follow [blender.md](./blender.md) from the user-level `.codex` checkout.
-
-## Continuous Instruction Improvement
-
-When an execution error reveals a reusable pitfall in the environment, tooling, shell syntax, encoding, authentication, API behavior, Git workflow, or deployment process, fix the immediate problem and update the relevant agent instruction document during the same task. Record the preventive rule and correct technique, not a chronological incident report. Keep one-off outages, obvious typos, transient provider failures, secrets, credentials, and private payloads out of the instructions. If no existing document fits, create a small focused Markdown guide and reference it from this file. Validate, commit, and push instruction improvements as their own coherent checkpoint.
+- Browser automation and provider settings: [browser.md](browser.md).
+- Android packaging and instrumentation: [android.md](android.md).
+- pfSense under Proxmox: [pfsense.md](pfsense.md).
+- FreeCAD automation: [freecad.md](freecad.md).
+- KiCad automation: [kicad.md](kicad.md).
+- Blender automation: [blender.md](blender.md).
+- Creating or updating a skill: its applicable skill instructions and validator. If the validator needs PyYAML, use an isolated runtime rather than changing global packages.

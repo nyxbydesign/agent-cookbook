@@ -5,8 +5,14 @@
 !/.gitignore
 !/AGENTS.md
 !/README.md
+!/LICENSE
+!/THIRD_PARTY_NOTICES.md
 !/commit.md
 !/transport.md
+!/project-workflow.md
+!/android.md
+!/kicad.md
+!/blender.md
 !/browser.md
 !/freecad.md
 !/pfsense.md

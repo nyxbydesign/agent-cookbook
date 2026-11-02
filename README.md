@@ -1,17 +1,34 @@
 # Agent Cookbook
 
-Portable Codex instructions and skill packages used across local projects.
+Reusable global agent guidance and complete skill packages, installed directly at `~/.codex`.
 
-## Contents
+- [AGENTS.md](AGENTS.md): entry point and conditional references.
+- [project-workflow.md](project-workflow.md): feature branches, project ownership, and public/private guidance.
+- [commit.md](commit.md): validation, checkpoints, commits, pushes, and deployment evidence.
+- [transport.md](transport.md): shell, SSH, HTTP, encoding, authentication, and retry practices.
+- [android.md](android.md): Android packaging and instrumentation requirements.
+- `skills/`: complete skill packages with their scripts, references, and assets.
 
-- `AGENTS.md` defines global planning, communication, Jolli, Git, and continuous-improvement behavior.
-- `commit.md` defines the test, checkpoint, commit, push, and deploy workflow.
-- `transport.md` documents reliable shell, SSH, API, encoding, authentication, and retry practices.
-- `skills/` contains complete skill packages with their scripts, references, tests, and assets.
-- `skills/apk-reverse/` provides a workflow for analyzing Android APKs and verifying client-side changes on authorized targets; its MIT license is included with the skill.
-- `skills/icon-generation/` creates individual icons and coherent multi-group collections with reference-grounded style continuity.
-- `skills/playwright/` provides browser automation workflows using Microsoft's Playwright CLI, adapted for Codex.
+The deny-all ignore policy admits only portable guidance and selected tools. Runtime configuration, sessions, memories, identities, credentials, approvals, routing records, logs, caches, and current operation evidence remain private and ignored.
 
-The repository lives directly in `~/.codex`, but its deny-all `.gitignore` permits only these portable files. Credentials, configuration, sessions, logs, databases, caches, attachments, and other machine-local runtime state must never be tracked.
+Projects keep their own contribution and architecture documentation. Do not copy or symlink the global cookbook into project repositories.
 
-Keep this cookbook user-level: do not copy, symlink, or commit its instruction files or skills inside individual project repositories. Projects may keep their own contribution and architecture documentation, while global cookbook references continue to resolve from `~/.codex`.
+## Install
+
+For a new setup where `~/.codex` does not exist:
+
+```sh
+git clone https://github.com/nyxbydesign/agent-cookbook.git ~/.codex
+```
+
+If `~/.codex` already contains a checkout, preserve local changes before integrating updates. If it contains runtime state without a checkout, review the portable files first and preserve existing instructions before importing them. Do not delete or replace configuration, credentials, sessions, or other runtime files to make room for the cookbook.
+
+## Customize
+
+Keep shareable defaults in tracked guidance and complete skill packages. Put personal preferences in an ignored `CODEX.md` beside `AGENTS.md`; the entry point reads it when present. Keep credentials, identities, approvals, chat routing, and current operation records private. Local preferences do not grant permissions or override platform controls.
+
+Projects keep portable branch, verification, architecture, and release instructions in their own contribution documentation. Declare the actual integration branch: `dev` where used, otherwise the existing `master` or `main`.
+
+## License
+
+Original cookbook guidance and custom content are [MIT licensed](LICENSE). Bundled packages keep their existing licenses and notices; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
