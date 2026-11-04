@@ -33,3 +33,4 @@
 # Portable Windows job guard; other local scripts remain private.
 !/scripts/
 !/scripts/windows_job_guard.py
+!/scripts/verify_cookbook_checkout.py
